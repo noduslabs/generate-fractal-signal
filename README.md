@@ -36,11 +36,75 @@ Fractal dynamics emulates the natural one, so if you want to seem like — at le
 
 The best is to see the source code of this module. In general, it first generates several power-law distributions within the range that you specify and then calculates [DFA alpha component](https://github.com/deemeetree/dfa) using our other NPM module [dfa-variability](https://github.com/deemeetree/dfa). The signal time series with the best DFA alpha component that equals 1 will be selected and shown to the user.
 
+## How to Use
+
+Simple initiation with a config that contains all the parameters of your expected signal:
+
+```js
+const GenerateSignal = require("./generate-signal");
+
+const signalGenerator = GenerateSignal;
+const signalConfig = {
+	signalLength: 128,
+	minWindow: 4,
+	scaleGrow: 0.5,
+	signalRange: [10000, 30000],
+	signalType: "Fractal",
+};
+const generatedSignal = signalGenerator.generateSignal(signalConfig);
+
+console.log(generatedSignal);
+```
+
+In this case, we ask it to generate time series based on:
+
+- `signalLength`: the number of datapoints in our expected signal — `128` in this case (note, it is better if it's in the 2^x increments, e.g. 128, 256, 512, etc due to the math behind DFA)
+
+- `signalRange`: each data point will be in the range between 0 and 5000 (e.g. milliseconds)
+
+- `minWindow`: `2^(scaleWindow^0.5)` is the smallest scale we look for patterns, in our case, it's `2^2` = 4 data points.
+
+- `scaleGrow`: grow scale by a factor of `0.5` for each step, that is, the next one is `2^(4.5^0.5)`, then `2^(5^0.5)` etc. resulting in the scale lengths 5, 8, etc. until it reaches 128.
+
+- `signalType`: "fractal" — the others don't work so well for now.
+
+As a result, you'll generate a JSON object as a response, which has the `timeSeries` property with an array of results, and there are other properties that contain information about the DFA alpha component (`1.04` in this case, almost perfectly fractal), and your initial parameters.
+
+```
+{
+  timeSeries: [
+    14174, 17113, 13844,  9608, 17521, 13895, 19655, 16988, 16391,
+    12445, 15590, 13284,  9786, 13756, 13237, 15960, 11059, 13385,
+    19780, 18349, 14968,  9250, 17155, 12995, 12440, 15314, 21198,
+    18083, 22827, 16612, 25768, 23430, 12410, 10153, 14083, 17586,
+     7138,  7240,  8383, 14013,  5940,  9361,  8532,  9253,  9071,
+     9159, 16713, 19059,  9472, 10806, 12491, 17257, 14141, 15589,
+    17244, 17788,     0,  5446,  2080,  4828, 10404,  8534,  5926,
+     7460, 20269, 21556, 12448, 13049, 22697, 25182, 19426, 25537,
+    12100, 17657, 22232, 18109, 16120, 13022, 15815, 10967,  6864,
+    10408, 14161, 14639, 10319, 11611, 10963,  7974, 16090, 11312,
+    15349, 11372, 15516, 11644, 15659, 12976, 22681, 25083, 14940,
+    18082,
+    ... 28 more items
+  ],
+  alpha: 1.0400067555820016,
+  signalLength: 128,
+  minWindow: 4,
+  scaleGrow: 0.5,
+  signalRange: [ 0, 30000 ],
+  desiredSignalType: 'Fractal'
+}
+```
+
+You can then take this time series and use it to emulate a certain activity that should happen every 10000 to 30000 milliseconds (10 to 30) seconds. Nobody will be able to tell that it's a machine doing that, because it is not random but has a certain pattern to it.
+
 ## To-Do
 
 - Other type of signal generators don't always deliver clean results
 
 - Provide more examples of use
+
+- Add floating point generator
 
 ## References
 
