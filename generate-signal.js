@@ -1,16 +1,16 @@
 const DFA = require("dfa-variability");
 
 const generateSignal = function ({
-	fractalGap = 128,
+	signalLength = 128,
 	minWindow = 4,
 	scaleGrow = 0.5,
-	fractalRange = [0, 30000],
+	signalRange = [0, 30000],
 	signalType = "Fractal",
 }) {
-	const numPoints = fractalGap;
+	const numPoints = signalLength;
 	const numWhiteNoise = 16;
 	const numTrials = 100;
-	const generatedRange = [fractalRange[0], fractalRange[1]];
+	const generatedRange = [signalRange[0], signalRange[1]];
 	const generateIntegers = true;
 
 	let bestDifference = Infinity;
@@ -73,10 +73,10 @@ const generateSignal = function ({
 	return {
 		timeSeries: bestSequence,
 		alpha: alphaValue,
-		fractalGap,
+		signalLength,
 		minWindow,
 		scaleGrow,
-		fractalRange,
+		signalRange,
 		desiredSignalType: signalType,
 	};
 
