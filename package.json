@@ -19,7 +19,7 @@
 		"captcha"
 	],
 	"author": "Dmitry Paranyushkin / Nodus Labs",
-	"license": "AGPL-3.0-or-later",
+	"license": "LGPL-3.0-or-later",
 	"dependencies": {
 		"dfa-variability": "^0.9.4"
 	}
