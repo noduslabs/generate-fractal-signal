@@ -52,6 +52,18 @@ The best is to see the source code of this module. In general, it first generate
 
 ## How to Use
 
+To install as an NPM module:
+
+```sh
+npm install generate-fractal-signal
+```
+
+Then add include it in your script using
+
+```js
+const GenerateFractalSignal = require("generate-fractal-signal");
+```
+
 Simple initiation with a config that contains all the parameters of your expected signal:
 
 ```js
