@@ -2,6 +2,8 @@
 
 ### Generates fractal time series of a specified length based on [DFA algorithm](https://github.com/deemeetree/dfa) within a specified range.
 
+--
+
 ## Use Cases
 
 - Adaptive scheduling
@@ -15,6 +17,14 @@
 - Art
 
 etc.
+
+Try this generator online: [Fractal Variability App](https://fractal-feedback.vercel.app/) - click on the Data tab to generate your signal and visualize it.
+
+![Image Alt Text](https://pbs.twimg.com/media/GBo8ew5WcAAGQFJ?format=png&name=large)
+
+Contact us via [support.noduslabs.com](https://support.noduslabs.com) or on Twitter: [@noduslabs](https://twitter.com/noduslabs)
+
+--
 
 ## Fractal Dynamics and Time
 
@@ -32,9 +42,13 @@ This library helps you generate a fractal signal, which you can then use for any
 
 Fractal dynamics emulates the natural one, so if you want to seem like — at least in the time dimension — that you are a living creature, perhaps you should be using fractal dynamics too.
 
+--
+
 ## How is the Fractal Signal Generated?
 
 The best is to see the source code of this module. In general, it first generates several power-law distributions within the range that you specify and then calculates [DFA alpha component](https://github.com/deemeetree/dfa) using our other NPM module [dfa-variability](https://github.com/deemeetree/dfa). The signal time series with the best DFA alpha component that equals 1 will be selected and shown to the user.
+
+--
 
 ## How to Use
 
@@ -98,6 +112,8 @@ As a result, you'll generate a JSON object as a response, which has the `timeSer
 
 You can then take this time series and use it to emulate a certain activity that should happen every 10000 to 30000 milliseconds (10 to 30) seconds. Nobody will be able to tell that it's a machine doing that, because it is not random but has a certain pattern to it.
 
+--
+
 ## To-Do
 
 - Other type of signal generators don't always deliver clean results
@@ -105,6 +121,8 @@ You can then take this time series and use it to emulate a certain activity that
 - Provide more examples of use
 
 - Add floating point generator
+
+--
 
 ## References
 
@@ -118,8 +136,20 @@ coming soon:
 
 - Fractal life rhythms
 
+--
+
 ## License
 
 GPL License
 
 Use it in your projects, but, please, contact us if you're intending commercial use. Capitalism works but it's not so fractal, so we need to make sure it doesn't grow in a destructive way.
+
+--
+
+## Contact Us
+
+Created by Dmitry Paranyushkin from Nodus Labs.
+
+Contact us via [support.noduslabs.com](https://support.noduslabs.com) or on Twitter: [@noduslabs](https://twitter.com/noduslabs)
+
+Also check out our AI tool for text network analysis and creative thinking: [www.infranodus.com](https://infranodus.com)
