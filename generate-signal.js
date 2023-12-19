@@ -41,16 +41,16 @@ const generateSignal = function ({
 		let sequence = [];
 
 		switch (signalType) {
-			case "random":
+			case "Random":
 				sequence = generateWhiteNoise(numPoints);
 				break;
-			case "stable":
-				sequence = generateWhiteNoise(numPoints, numWhiteNoise);
+			case "Stable":
+				sequence = generatePinkNoiseByVoss(numPoints, numWhiteNoise);
 				break;
-			case "unstable":
-				sequence = generateWhiteNoise(numPoints, numWhiteNoise);
+			case "Unstable":
+				sequence = generatePinkNoiseByVoss(numPoints, numWhiteNoise);
 				break;
-			case "fractal":
+			case "Fractal":
 			default:
 				sequence = generatePinkNoiseByVoss(numPoints, numWhiteNoise);
 				break;
