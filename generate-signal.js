@@ -96,21 +96,69 @@ const generateSignal = function ({
 	function generateBrownianNoise(length) {
 		let brownianNoise = new Array(length);
 
-		brownianNoise[0] =
-			Math.random() * (generatedRange[1] - generatedRange[0]) +
-			generatedRange[0];
+		const valueRange = generatedRange[1] - generatedRange[0];
+		brownianNoise[0] = Math.random() * valueRange + generatedRange[0];
+
+		if (generateIntegers) {
+			brownianNoise[0] = Math.round(brownianNoise[0]);
+		}
 
 		for (let i = 1; i < length; i++) {
-			let delta =
-				((Math.random() * 2 - 1) * (generatedRange[1] - generatedRange[0])) /
-				50; // Adjust the divisor for more/less drift
-			brownianNoise[i] = brownianNoise[i - 1] + delta;
+			let delta = Math.random();
 
-			// Ensure the value stays within the range
-			if (brownianNoise[i] > generatedRange[1]) {
-				brownianNoise[i] = generatedRange[1];
-			} else if (brownianNoise[i] < generatedRange[0]) {
-				brownianNoise[i] = generatedRange[0];
+			let operation = Math.random() > 0.5 ? "+" : "-";
+
+			let multiplier = 1;
+
+			let longTrend = 0;
+			let shortTrend = 0;
+
+			if (i >= 8) {
+				for (s = 1; s <= 3; s++) {
+					shortTrend += brownianNoise[i - s] - brownianNoise[i - s - 1];
+				}
+				for (l = 1; l <= 15; l++) {
+					longTrend += brownianNoise[i - l] - brownianNoise[i - l - 1];
+				}
+
+				if (shortTrend > 0) {
+					operation = "+";
+					multiplier = 0.5;
+				}
+				if (shortTrend < 0) {
+					operation = "-";
+					multiplier = 0.5;
+				}
+
+				if (longTrend > 0) {
+					operation = "-";
+				}
+				if (longTrend < 0) {
+					operation = "+";
+				}
+			}
+			let newValue =
+				operation === "+"
+					? brownianNoise[i - 1] + delta * multiplier
+					: brownianNoise[i - 1] - delta * multiplier;
+
+			if (shortTrend == 0) {
+				newValue = brownianNoise[i - 1];
+			}
+
+			if (longTrend == 0) {
+				newValue =
+					Math.random() > 0.5
+						? brownianNoise[i - 1] + delta * (valueRange / 4) // ? brownianNoise[i - 1] + delta * (shortTrend + 1)
+						: brownianNoise[i - 1] - delta * (valueRange / 4);
+			}
+
+			if (newValue > generatedRange[1]) {
+				brownianNoise[i] = brownianNoise[i - 1];
+			} else if (newValue < generatedRange[0]) {
+				brownianNoise[i] = brownianNoise[i - 1];
+			} else {
+				brownianNoise[i] = newValue;
 			}
 
 			if (generateIntegers) {
