@@ -142,6 +142,8 @@ You can then take this time series and use it to emulate a certain activity that
 
 - [Nodus Labs / Movement Resilience using Fractals](https://noduslabs.com/featured/fractal-variability-feedback-system/)
 
+Some code was used from [https://github.com/joeiddon/perlin](https://github.com/joeiddon/perlin) for Perlin noise creation.
+
 coming soon:
 
 - Fractals for emulating natural human action in time
