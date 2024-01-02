@@ -22,17 +22,42 @@ const generateSignal = function ({
 	let idealAlpha = 1;
 
 	switch (signalType) {
+		case "Aleatory":
 		case "Random":
 		case "Perlin":
+		case "Structured":
+		case "Sequential":
+		case "WhiteNoise":
+		case "White_Noise":
+		case "White Noise":
+		case "Stochastic":
+		case "Uniform":
 			idealAlpha = 0.5;
 			break;
 		case "Stable":
+		case "Regular":
+		case "Mosaic":
+		case "Stationary":
 			idealAlpha = 0.75;
 			break;
 		case "Unstable":
+		case "Gradient":
+		case "Shifting":
+		case "BrownNoise":
+		case "Brown Noise":
+		case "Brown_Noise":
+		case "NonStationary":
+		case "NonStationary":
+		case "Non_Stationary":
+		case "Non Stationary":
 			idealAlpha = 1.5;
 			break;
+		case "PinkNoise":
+		case "Pink_Noise":
+		case "Pink Noise":
+		case "Adaptive":
 		case "Fractal":
+		case "Transitional":
 		default:
 			idealAlpha = 1;
 			break;
@@ -42,19 +67,43 @@ const generateSignal = function ({
 		let sequence = [];
 
 		switch (signalType) {
+			case "Sequential":
+			case "Structured":
+				sequence = generateOrderedSequence(numPoints);
+				break;
 			case "Random":
+			case "Aleatory":
+			case "WhiteNoise":
+			case "White_Noise":
+			case "White Noise":
 				sequence = generateWhiteNoise(numPoints);
 				break;
 			case "Stable":
+			case "Regular":
+			case "Mosaic":
+			case "Stationary":
 				sequence = generatePinkNoiseByVoss(numPoints, 4);
 				break;
 			case "Perlin":
 				sequence = generatePerlinNoise(numPoints);
 				break;
 			case "Unstable":
+			case "Gradient":
+			case "Shifting":
+			case "BrownNoise":
+			case "Brown Noise":
+			case "Brown_Noise":
+			case "NonStationary":
+			case "Non_Stationary":
+			case "Non Stationary":
 				sequence = generateBrownianNoise(numPoints);
 				break;
 			case "Fractal":
+			case "PinkNoise":
+			case "Pink_Noise":
+			case "Pink Noise":
+			case "Adaptive":
+			case "Transitional":
 			default:
 				sequence = generatePinkNoiseByVoss(numPoints, numWhiteNoise);
 				break;
@@ -91,6 +140,16 @@ const generateSignal = function ({
 				generatedRange[0];
 			return generateIntegers ? Math.round(randomVal) : randomVal;
 		});
+	}
+
+	function generateOrderedSequence(length) {
+		let data = [];
+		for (let i = 0; i < length; i++) {
+			const oneValue = Math.floor((((i % 4) + 1) * generatedRange[1]) / 4);
+			const anotherValue = Math.floor((((i % 2) + 1) * generatedRange[1]) / 4);
+			data.push(Math.random() > 0.5 ? oneValue : anotherValue);
+		}
+		return data;
 	}
 
 	function generateBrownianNoise(length) {

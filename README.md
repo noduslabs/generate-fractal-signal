@@ -126,6 +126,18 @@ You can then take this time series and use it to emulate a certain activity that
 
 --
 
+## Possible Signal Types Generated
+
+Multiple signal types (`signalType` variable) which correlate with various types of distributions are available:
+
+- `Aleatory` — a random process where every value from the range has a similar chance of appearing (synonyms: `Random`, `Stochastic`, `WhiteNoise`, `Uniform`). Random variability. The values will most likely fit normal distribution, the average will most likely be somewhat in the middle of the range. Suitable for emulating random processes, seeding sequences, white noise, aleatory musical composition, light installations. The calculated alpha component is around 0.5 or below. Generated using white noise generator (`Math.random` function).
+
+- `Stationary` - short-term patterns start to emerge and the signal becomes stationary in that most values are grouped around a certain mean (synonyms: `Stable`, `Regular`, `Mosaic`). Mosaic variability. It can be interpreted as the emergence of short-term memory in the system. If a certain value appears it is likely to be followed by a similar value but not for too long. Then the pattern may change, hence the term "Mosaic". Suitable for emulating "normal", "regular" behaviors. The calculated alpha component is around 0.75. Generated using a combinatino of white noise and pink noise generators.
+
+- `Fractal` — balanced interaction between short-term and long-term patterns in a time series, self-similar patterns of variability across different time scales (synonyms: `PinkNoise`, `Transitional`, `Adaptive`). Characteristic for the processes that combine long-term and short-term memory, thus highly sensitive to a wide range of impulses from the environment and, thus, inherently more adaptive. Suitable for modeling highly resilient, agile, adaptive systems or "natural" sound and visuals. The calculated alpha component is 1. Generated using pink noise generators, which .
+
+- `Gradient` - random walk process where each next step depends on the previous one (synonyms: `BrownNoise`, `Shifting`, `NonStationary`). Typical for many everyday processes where long-term influences (trends) overpower the short-term ones (e.g. stock markets). Suitable for emulating human behaviors or processes with prolonged periods of stability. The calculated alpha component is 1.5. Generated using a rule-based system.
+
 ## To-Do
 
 - Other type of signal generators don't always deliver clean results
