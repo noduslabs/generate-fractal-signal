@@ -1,11 +1,14 @@
 const DFA = require("dfa-variability");
 
+const { Readable } = require("stream");
+
 const generateSignal = function ({
 	signalLength = 128,
 	minWindow = 4,
 	scaleGrow = 0.5,
 	signalRange = [0, 30000],
 	signalType = "Fractal",
+	streaming = false,
 }) {
 	const numPoints = signalLength;
 	const numWhiteNoise = 16;
@@ -122,6 +125,36 @@ const generateSignal = function ({
 			bestSequence = sequence;
 		}
 	}
+
+	const returnObject = {
+		alpha: alphaValue,
+		signalLength,
+		minWindow,
+		scaleGrow,
+		signalRange,
+		desiredSignalType: signalType,
+	};
+
+	if (streaming) {
+		let previousTimer = 0;
+		const stream = new Readable({
+			read() {
+				for (let i = 0; i < bestSequence.length; i++) {
+					setTimeout(() => {
+						this.push(bestSequence[i].toString());
+					}, previousTimer + bestSequence[i]);
+					previousTimer += bestSequence[i];
+				}
+				setTimeout(() => {
+					this.push(null);
+				}, previousTimer);
+			},
+		});
+
+		return { stream, ...returnObject };
+	}
+
+	returnObject.timeSeries = bestSequence;
 
 	return {
 		timeSeries: bestSequence,

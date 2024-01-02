@@ -76,6 +76,7 @@ const signalConfig = {
 	scaleGrow: 0.5,
 	signalRange: [10000, 30000],
 	signalType: "Fractal",
+	streaming: false,
 };
 const generatedSignal = signalGenerator.generateSignal(signalConfig);
 
@@ -92,7 +93,9 @@ In this case, we ask it to generate time series based on:
 
 - `scaleGrow`: grow scale by a factor of `0.5` for each step, that is, the next one is `2^(4.5^0.5)`, then `2^(5^0.5)` etc. resulting in the scale lengths 5, 8, etc. until it reaches 128.
 
-- `signalType`: "fractal" — the others don't work so well for now.
+- `signalType`: "Fractal" is the default value. See below for all possible signal types.
+
+- `streaming`: "false" — do not stream the results. If set to true, will stream the results. Useful for values that are above 100, so you can capture the events in real-time.
 
 As a result, you'll generate a JSON object as a response, which has the `timeSeries` property with an array of results, and there are other properties that contain information about the DFA alpha component (`1.04` in this case, almost perfectly fractal), and your initial parameters.
 
