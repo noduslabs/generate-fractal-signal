@@ -206,10 +206,10 @@ const generateSignal = function ({
 			let shortTrend = 0;
 
 			if (i >= 8) {
-				for (s = 1; s <= 3; s++) {
+				for (let s = 1; s <= 3; s++) {
 					shortTrend += brownianNoise[i - s] - brownianNoise[i - s - 1];
 				}
-				for (l = 1; l <= 15; l++) {
+				for (let l = 1; l <= 15; l++) {
 					longTrend += brownianNoise[i - l] - brownianNoise[i - l - 1];
 				}
 
