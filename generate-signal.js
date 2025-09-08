@@ -5,7 +5,8 @@ const { Readable } = require("stream");
 const generateSignal = function ({
 	signalLength = 128,
 	minWindow = 4,
-	scaleGrow = 2,
+	scaleGrow = 0.25,
+	linearStep = 2,
 	signalRange = [0, 30000],
 	signalType = "Fractal",
 	streaming = false,
@@ -18,6 +19,7 @@ const generateSignal = function ({
 
 	let bestDifference = Infinity;
 	let bestSequence;
+	let bestAlpha;
 	let dfa;
 	let alphaComponent;
 	let alphaValue;
@@ -114,7 +116,7 @@ const generateSignal = function ({
 
 		dfa = new DFA(sequence);
 
-		alphaComponent = dfa.compute(minWindow, scaleGrow);
+		alphaComponent = dfa.compute(minWindow, scaleGrow, linearStep);
 
 		console.log(alphaComponent);
 		alphaValue = alphaComponent.alpha;
@@ -124,11 +126,12 @@ const generateSignal = function ({
 		if (difference < bestDifference) {
 			bestDifference = difference;
 			bestSequence = sequence;
+			bestAlpha = alphaValue;
 		}
 	}
 
 	const returnObject = {
-		alpha: alphaValue,
+		alpha: bestAlpha,
 		signalLength,
 		minWindow,
 		scaleGrow,
@@ -159,7 +162,7 @@ const generateSignal = function ({
 
 	return {
 		timeSeries: bestSequence,
-		alpha: alphaValue,
+		alpha: bestAlpha,
 		signalLength,
 		minWindow,
 		scaleGrow,

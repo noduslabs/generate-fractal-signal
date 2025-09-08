@@ -72,8 +72,9 @@ const GenerateSignal = require("./generate-signal");
 const signalGenerator = GenerateSignal;
 const signalConfig = {
 	signalLength: 128,
-	minWindow: 4,
-	scaleGrow: 0.5,
+	minWindow: 4, // minimum scale window
+	scaleGrow: 0.25, // scale grow factor
+	linearStep: 2, // linear step for alpha1 and alpha2
 	signalRange: [10000, 30000],
 	signalType: "Fractal",
 	streaming: false,
