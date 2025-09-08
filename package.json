@@ -1,6 +1,6 @@
 {
 	"name": "generate-fractal-signal",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Generates fractal time series of a specified length based on DFA algorithm within a specified range.",
 	"main": "generate-signal.js",
 	"scripts": {
