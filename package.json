@@ -1,6 +1,6 @@
 {
 	"name": "generate-fractal-signal",
-	"version": "0.3.0",
+	"version": "1.0.0",
 	"description": "Generates fractal time series of a specified length based on DFA algorithm within a specified range.",
 	"main": "generate-signal.js",
 	"scripts": {
@@ -26,6 +26,6 @@
 	"author": "Dmitry Paranyushkin / Nodus Labs",
 	"license": "AGPL-3.0-or-later",
 	"dependencies": {
-		"dfa-variability": "^0.9.8"
+		"dfa-variability": "^2.0.0"
 	}
 }

@@ -5,7 +5,7 @@ const { Readable } = require("stream");
 const generateSignal = function ({
 	signalLength = 128,
 	minWindow = 4,
-	scaleGrow = 0.5,
+	scaleGrow = 2,
 	signalRange = [0, 30000],
 	signalType = "Fractal",
 	streaming = false,
@@ -116,6 +116,7 @@ const generateSignal = function ({
 
 		alphaComponent = dfa.compute(minWindow, scaleGrow);
 
+		console.log(alphaComponent);
 		alphaValue = alphaComponent.alpha;
 
 		const difference = Math.abs(alphaValue - idealAlpha);

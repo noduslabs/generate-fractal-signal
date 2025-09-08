@@ -4,23 +4,23 @@ const signalGenerator = GenerateSignal;
 const signalConfig = {
 	fractalGap: 128,
 	minWindow: 4,
-	scaleGrow: 0.5,
-	signalRange: [0, 700],
+	scaleGrow: 0.25,
+	signalRange: [1, 4],
 	signalType: "Fractal",
-	streaming: true,
+	streaming: false,
 };
 const generatedSignal = signalGenerator.generateSignal(signalConfig);
 
-console.log(generatedSignal);
+console.log(JSON.stringify(generatedSignal));
 
-const stream = generatedSignal.stream;
+// const stream = generatedSignal.stream;
 
-stream.on("data", (number) => {
-	const buffer = Buffer.from(number);
-	const decodedString = buffer.toString("utf-8");
-	console.log(decodedString); // Do something with each number
-});
+// stream.on("data", (number) => {
+// 	const buffer = Buffer.from(number);
+// 	const decodedString = buffer.toString("utf-8");
+// 	console.log(decodedString); // Do something with each number
+// });
 
-stream.on("end", () => {
-	console.log("finished the stream");
-});
+// stream.on("end", () => {
+// 	console.log("finished the stream");
+// });
