@@ -1,10 +1,10 @@
 {
 	"name": "generate-fractal-signal",
-	"version": "1.0.1",
-	"description": "Generates fractal time series of a specified length based on DFA algorithm within a specified range.",
+	"version": "2.0.0",
+	"description": "Generates mono- and multifractal time series with a chosen DFA alpha (global, alpha1, alpha2 or a crossover), verified with dfa-variability.",
 	"main": "generate-signal.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "node test.js"
 	},
 	"repository": {
 		"type": "git",
@@ -13,19 +13,21 @@
 	"homepage": "https://github.com/noduslabs/generate-fractal-signal",
 	"keywords": [
 		"fractal",
+		"multifractal",
 		"dfa",
+		"mfdfa",
+		"pink noise",
+		"1/f",
+		"hurst",
 		"signal",
-		"processing",
-		"signal",
-		"processing",
-		"time",
-		"series",
-		"scraping",
-		"captcha"
+		"time series",
+		"generator",
+		"hrv",
+		"entrainment"
 	],
 	"author": "Dmitry Paranyushkin / Nodus Labs",
 	"license": "AGPL-3.0-or-later",
 	"dependencies": {
-		"dfa-variability": "^2.0.0"
+		"dfa-variability": "^2.4.0"
 	}
 }
