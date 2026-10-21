@@ -1,5 +1,9 @@
 # Fractal Signal Generator
 
+[![npm version](https://img.shields.io/npm/v/generate-fractal-signal.svg)](https://www.npmjs.com/package/generate-fractal-signal)
+[![npm downloads](https://img.shields.io/npm/dm/generate-fractal-signal.svg)](https://www.npmjs.com/package/generate-fractal-signal)
+[![license](https://img.shields.io/npm/l/generate-fractal-signal.svg)](https://github.com/noduslabs/generate-fractal-signal)
+
 ### Generates mono- and multifractal time series of a specified length and range with a chosen [DFA](https://github.com/deemeetree/dfa) exponent (global α, short-term α₁, long-term α₂, or a crossover between the two).
 
 --
